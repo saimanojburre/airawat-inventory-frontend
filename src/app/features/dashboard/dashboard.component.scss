@@ -1,0 +1,143 @@
+/* ================= DASHBOARD ================= */
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* ================= STAT CARDS ================= */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: var(--space-lg);
+}
+
+.stat-card {
+    padding: 22px;
+    border-radius: var(--radius-lg);
+    background: var(--card-bg);
+
+    box-shadow: var(--shadow-md);
+    transition: 0.25s ease;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-header {
+    font-size: 14px;
+    color: var(--text-light);
+}
+
+.stat-value {
+    font-size: 34px;
+    font-weight: 700;
+    margin-top: 8px;
+    color: var(--text-dark);
+}
+
+/* COLOR ACCENTS */
+
+.warning {
+    border-left: 4px solid var(--warning);
+}
+
+.success {
+    border-left: 4px solid var(--success);
+}
+
+.info {
+    border-left: 4px solid var(--primary);
+}
+
+/* ================= LOWER GRID ================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-lg);
+}
+
+/* ================= CHART ================= */
+
+.chart-card {
+    padding: 20px;
+}
+
+.chart-card h3 {
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* ================= ACTIVITY ================= */
+
+.activity-card {
+    padding: 20px;
+}
+
+.activity-card h3 {
+    margin-bottom: 10px;
+}
+
+/* timeline style */
+.activity {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.activity:last-child {
+    border-bottom: none;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    margin-top: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+}
+
+.activity-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-content span {
+    font-weight: 500;
+}
+
+.activity-content small {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.dot {
+    width: 8px;
+    height: 8px;
+    margin-top: 6px;
+    border-radius: 50%;
+}
+
+.dot.purchase {
+    background: var(--success);
+}
+
+.dot.usage {
+    background: var(--warning);
+}

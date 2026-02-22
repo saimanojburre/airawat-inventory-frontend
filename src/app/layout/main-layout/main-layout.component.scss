@@ -1,0 +1,58 @@
+/* ================= LAYOUT ROOT ================= */
+
+.layout {
+    display: flex;
+    height: 100vh;
+    background: var(--app-bg);
+    overflow: hidden;
+}
+
+/* ================= MAIN AREA ================= */
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    /* prevents overflow issues */
+}
+
+/* ================= CONTENT AREA ================= */
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+
+    padding: var(--space-lg);
+    background: var(--app-bg);
+
+    /* smooth scroll */
+    scroll-behavior: smooth;
+}
+
+/* ================= PAGE WRAPPER EFFECT ================= */
+
+/* makes pages look like floating panels */
+.content>* {
+    animation: pageEnter 0.25s ease;
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .content {
+        padding: var(--space-md);
+    }
+}

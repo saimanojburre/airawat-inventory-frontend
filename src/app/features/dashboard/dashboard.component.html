@@ -1,0 +1,45 @@
+<div class="dashboard">
+  <!-- STAT CARDS -->
+  <div class="card-grid">
+    <mat-card class="stat-card">
+      <div class="stat-header">Total Items</div>
+      <div class="stat-value">{{ stats.totalItems }}</div>
+    </mat-card>
+
+    <mat-card class="stat-card warning">
+      <div class="stat-header">Low Stock</div>
+      <div class="stat-value">{{ stats.lowStock }}</div>
+    </mat-card>
+
+    <mat-card class="stat-card success">
+      <div class="stat-header">Purchases</div>
+      <div class="stat-value">{{ stats.purchases }}</div>
+    </mat-card>
+
+    <mat-card class="stat-card info">
+      <div class="stat-header">Usage</div>
+      <div class="stat-value">{{ stats.usage }}</div>
+    </mat-card>
+  </div>
+
+  <!-- CHART + ACTIVITY -->
+  <div class="dashboard-grid">
+    <mat-card class="chart-card">
+      <h3>Stock Overview</h3>
+      <canvas id="stockChart"></canvas>
+    </mat-card>
+
+    <mat-card class="activity-card">
+      <h3>Recent Activity</h3>
+
+      <div class="activity" *ngFor="let a of activities">
+        <div class="dot" [ngClass]="a.type"></div>
+
+        <div class="activity-content">
+          <span>{{ a.name }}</span>
+          <small>{{ a.date }}</small>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

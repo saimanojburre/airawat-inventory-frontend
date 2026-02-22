@@ -1,1 +1,131 @@
-/* You can add global styles to this file, and also import other style files */
+/* ================= GLOBAL RESET ================= */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--app-bg);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================= DESIGN SYSTEM ================= */
+
+:root {
+
+    /* ===== BRAND ===== */
+    --primary: #4f46e5;
+    --primary-light: #6366f1;
+    --primary-soft: #eef2ff;
+
+    /* ===== BACKGROUND ===== */
+    --app-bg: #f6f8fc;
+    --card-bg: #ffffff;
+    --surface: #f9fafb;
+
+    /* ===== TEXT ===== */
+    --text-dark: #111827;
+    --text-medium: #374151;
+    --text-light: #6b7280;
+
+    /* ===== STATUS ===== */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+
+    /* ===== BORDER ===== */
+    --border-light: #e5e7eb;
+
+    /* ===== SHADOW SYSTEM (VERY IMPORTANT) ===== */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.12);
+
+    /* ===== RADIUS ===== */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+
+    /* ===== SPACING SCALE ===== */
+    --space-xs: 6px;
+    --space-sm: 10px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+}
+
+/* ================= MATERIAL GLOBAL IMPROVEMENTS ================= */
+
+/* Cards look premium everywhere */
+.mat-mdc-card {
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Buttons smoother */
+.mat-mdc-raised-button {
+    border-radius: var(--radius-md) !important;
+    font-weight: 600;
+}
+
+/* Form fields cleaner */
+.mat-mdc-form-field {
+    --mdc-outlined-text-field-container-shape: 10px;
+}
+
+/* Remove extra material spacing */
+.mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+/* ================= SCROLLBAR (PREMIUM TOUCH) ================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* ================= PAGE TRANSITION ================= */
+
+router-outlet+* {
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================= UTILITIES ================= */
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-lg);
+}
+
+.text-muted {
+    color: var(--text-light);
+}

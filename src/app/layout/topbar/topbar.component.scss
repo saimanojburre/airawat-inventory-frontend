@@ -1,0 +1,102 @@
+/* ================= TOPBAR ================= */
+
+.topbar {
+    height: 64px;
+    background: white;
+    color: var(--text-dark);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
+    box-sizing: border-box;
+
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+
+    position: relative;
+    z-index: 10;
+}
+
+/* ================= LEFT ================= */
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* MENU BUTTON */
+
+.menu-btn {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+
+    color: var(--text-medium);
+    border-radius: 8px;
+    padding: 6px 10px;
+
+    transition: 0.2s ease;
+}
+
+.menu-btn:hover {
+    background: var(--surface);
+}
+
+/* TITLE */
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* ================= RIGHT ================= */
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* PROFILE */
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-medium);
+    font-weight: 500;
+}
+
+.avatar {
+    background: var(--primary-soft);
+    color: var(--primary);
+    padding: 6px 8px;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+/* LOGOUT BUTTON */
+
+.logout-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+
+    padding: 7px 14px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+}

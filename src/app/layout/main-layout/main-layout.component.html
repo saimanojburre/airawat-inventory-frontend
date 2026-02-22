@@ -1,0 +1,13 @@
+<div class="layout">
+  <!-- Sidebar -->
+  <app-sidebar *ngIf="showSidebar"></app-sidebar>
+
+  <!-- Main Area -->
+  <div class="main">
+    <app-topbar (toggle)="toggleSidebar()"></app-topbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+/* ================= CONTAINER ================= */
+
+.inventory-container {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-weight: 600;
+}
+
+.search-field {
+  width: 280px;
+}
+
+/* ================= TABLE WRAPPER ================= */
+
+.table-wrapper {
+  border-radius: 12px;
+}
+
+.premium-table {
+  max-height: 520px;
+  overflow: auto;
+}
+
+/* ================= TABLE ================= */
+
+.inventory-table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* ===== STICKY HEADER ===== */
+
+th.mat-mdc-header-cell {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #f8fafc;
+  font-weight: 600;
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* ================= COLUMN WIDTH ================= */
+
+.col-category {
+  width: 18%;
+}
+
+.col-item {
+  width: 28%;
+}
+
+.col-small {
+  width: 10%;
+}
+
+.col-medium {
+  width: 17%;
+}
+
+/* ================= ROW STYLE ================= */
+
+td.mat-mdc-cell {
+  padding: 10px 12px;
+}
+
+.mat-mdc-row:hover {
+  background: #f6f9ff;
+  transition: 0.2s;
+}
+
+/* ================= CURRENCY ================= */
+
+.currency {
+  text-align: right;
+}
+
+.total-cell {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+/* ================= LOW STOCK ALERT ⭐ ================= */
+
+.low-stock {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+/* ================= SCROLLBAR ================= */
+
+.premium-table::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.premium-table::-webkit-scrollbar-thumb {
+  background: #d6d6d6;
+  border-radius: 6px;
+}
