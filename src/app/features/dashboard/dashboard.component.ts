@@ -14,9 +14,6 @@ import { UsageService } from '../../core/services/usage.service';
 export class DashboardComponent implements OnInit {
   chart!: Chart;
 
-  // ✅ itemId -> itemName mapping
-  itemMap: { [key: number]: string } = {};
-
   stats = {
     totalItems: 0,
     lowStock: 0,
@@ -45,37 +42,32 @@ export class DashboardComponent implements OnInit {
 
       this.stats.lowStock = items.filter((i) => i.quantity < 10).length;
 
-      // ✅ create itemId → itemName map
-      items.forEach((i) => {
-        this.itemMap[i.id] = i.itemName;
-      });
-
       this.createChart(items);
     });
 
-    // ===== PURCHASE + USAGE =====
+    // ===== PURCHASE + USAGE ACTIVITY =====
     forkJoin({
       purchases: this.purchaseService.getAll(),
-      usage: this.usageService.getItems(),
+      usage: this.usageService.getUsage(),
     }).subscribe(({ purchases, usage }) => {
       this.stats.purchases = purchases.length;
       this.stats.usage = usage.length;
 
-      // ---------- PURCHASE ACTIVITIES ----------
+      // PURCHASE ACTIVITIES
       const purchaseActivities = purchases.map((p: any) => ({
-        name: `${this.itemMap[p.itemId] || 'Item'} purchased (${p.quantity})`,
+        name: `${p.itemName} purchased (${p.quantity})`,
         date: new Date(p.purchaseDate),
         type: 'purchase',
       }));
 
-      // ---------- USAGE ACTIVITIES ----------
+      // USAGE ACTIVITIES
       const usageActivities = usage.map((u: any) => ({
-        name: `${this.itemMap[u.itemId] || 'Item'} used (${u.quantity})`,
+        name: `${u.itemName} used (${u.quantity})`,
         date: new Date(u.usageTime),
         type: 'usage',
       }));
 
-      // ---------- MERGE + SORT ----------
+      // MERGE + SORT LATEST
       this.activities = [...purchaseActivities, ...usageActivities]
         .sort((a, b) => b.date.getTime() - a.date.getTime())
         .slice(0, 6)

@@ -1,0 +1,62 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="brand">
+      <h1>Create Account</h1>
+      <p>Inventory Portal Registration</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <!-- USERNAME -->
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+      </mat-form-field>
+
+      <!-- EMAIL -->
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+      <!-- ROLE -->
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Role</mat-label>
+
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role.value">
+            {{ role.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- PASSWORD -->
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+        />
+      </mat-form-field>
+
+      <!-- CONFIRM PASSWORD -->
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" />
+      </mat-form-field>
+
+      <!-- ERROR -->
+      <div class="error-message" *ngIf="error">
+        {{ error }}
+      </div>
+
+      <button mat-raised-button color="primary" class="login-btn">
+        Register
+      </button>
+
+      <div class="login-link">
+        Already have account?
+        <a (click)="goToLogin()">Login</a>
+      </div>
+    </form>
+  </div>
+</div>

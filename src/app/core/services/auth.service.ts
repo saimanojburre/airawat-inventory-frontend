@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private api = 'http://localhost:8081/auth';
+  private baseUrl = environment.apiBaseUrl;
+
+  // private api = 'http://localhost:8080/auth';
 
   constructor(private http: HttpClient) {}
   isLoggedIn(): boolean {
@@ -11,9 +15,12 @@ export class AuthService {
   }
 
   login(data: any) {
-    return this.http.post(`${this.api}/login`, data, {
+    return this.http.post(`${this.baseUrl}/auth/login`, data, {
       responseType: 'text',
     });
+  }
+  register(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/register`, data);
   }
 
   saveToken(token: string) {

@@ -10,12 +10,21 @@ import { PurchaseComponent } from './features/purchase/purchase.component';
 import { UsageComponent } from './features/usage/usage.component';
 
 import { authGuard } from './core/guards/auth.guard';
+import { AddPurchaseComponent } from './features/purchase/add-purchase/add-purchase.component';
+import { ViewPurchaseComponent } from './features/purchase/view-purchase/view-purchase.component';
+import { AddUsageComponent } from './features/usage/add-usage/add-usage.component';
+import { ViewUsageComponent } from './features/usage/view-usage/view-usage.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 export const routes: Routes = [
   // Login
   {
     path: '',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
 
   // Protected Application Routes
@@ -44,8 +53,24 @@ export const routes: Routes = [
         component: PurchaseComponent,
       },
       {
+        path: 'purchase/add',
+        component: AddPurchaseComponent,
+      },
+      {
+        path: 'purchase/view',
+        component: ViewPurchaseComponent,
+      },
+      {
         path: 'usage',
         component: UsageComponent,
+      },
+      {
+        path: 'usage/add',
+        component: AddUsageComponent,
+      },
+      {
+        path: 'usage/view',
+        component: ViewUsageComponent,
       },
     ],
   },

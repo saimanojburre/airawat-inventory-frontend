@@ -23,6 +23,9 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
 
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
   login() {
     if (this.loginForm.invalid) return;
 

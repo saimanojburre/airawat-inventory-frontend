@@ -1,0 +1,100 @@
+<div class="page-header">
+  <button mat-button class="back-btn" (click)="goBack()">← Back</button>
+</div>
+
+<div class="usage-view">
+  <h2>Usage Historry</h2>
+
+  <!-- FILTER BAR -->
+  <form [formGroup]="filterForm" class="filter-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>From Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="fromPicker"
+        formControlName="fromDate"
+        (dateChange)="applyFilter()"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="fromPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>To Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="toPicker"
+        formControlName="toDate"
+        (dateChange)="applyFilter()"
+      />
+      <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+      <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Search</mat-label>
+      <input matInput formControlName="search" (keyup)="applyFilter()" />
+    </mat-form-field>
+  </form>
+
+  <!-- TABLE -->
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Item</th>
+      <td mat-cell *matCellDef="let r">{{ r.itemName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Qty</th>
+      <td mat-cell *matCellDef="let r">{{ r.quantity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+      <td mat-cell *matCellDef="let r">{{ r.department }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="usedFor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Used For</th>
+      <td mat-cell *matCellDef="let r">{{ r.usedFor }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="takenBy">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Taken By</th>
+      <td mat-cell *matCellDef="let r">{{ r.takenBy }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="givenBy">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Given By</th>
+      <td mat-cell *matCellDef="let r">{{ r.givenBy }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date & Time</th>
+      <td mat-cell *matCellDef="let r">
+        {{ r.usageTime | date: "medium" }}
+      </td>
+    </ng-container>
+
+    <!-- ACTIONS -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+
+      <td mat-cell *matCellDef="let r">
+        <button mat-icon-button color="primary" (click)="edit(r)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="delete(r)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

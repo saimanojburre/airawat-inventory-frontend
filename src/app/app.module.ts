@@ -28,6 +28,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AddPurchaseComponent } from './features/purchase/add-purchase/add-purchase.component';
+import { ViewPurchaseComponent } from './features/purchase/view-purchase/view-purchase.component';
+import { AddUsageComponent } from './features/usage/add-usage/add-usage.component';
+import { ViewUsageComponent } from './features/usage/view-usage/view-usage.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     InventoryComponent,
     PurchaseComponent,
     UsageComponent,
+    AddPurchaseComponent,
+    ViewPurchaseComponent,
+    UsageComponent,
+    AddUsageComponent,
+    ViewUsageComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
