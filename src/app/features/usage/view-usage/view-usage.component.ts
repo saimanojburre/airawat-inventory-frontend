@@ -5,6 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { UsageService } from 'src/app/core/services/usage.service';
 
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-view-usage',
   templateUrl: './view-usage.component.html',
@@ -54,7 +57,7 @@ export class ViewUsageComponent {
     });
   }
 
-  // ================= LOAD DATA =================
+  // ================= LOAD =================
   loadUsage() {
     this.usageService.getUsage().subscribe((res) => {
       this.dataSource.data = res;
@@ -69,13 +72,12 @@ export class ViewUsageComponent {
       const usageDate = new Date(data.usageTime);
 
       const matchFrom = !fromDate || usageDate >= new Date(fromDate);
-
       const matchTo = !toDate || usageDate <= new Date(toDate);
 
       const matchSearch =
         !search ||
-        data.itemName.toLowerCase().includes(search.toLowerCase()) ||
-        data.department.toLowerCase().includes(search.toLowerCase());
+        data.itemName?.toLowerCase().includes(search.toLowerCase()) ||
+        data.department?.toLowerCase().includes(search.toLowerCase());
 
       return matchFrom && matchTo && matchSearch;
     };
@@ -83,13 +85,40 @@ export class ViewUsageComponent {
     this.dataSource.filter = Math.random().toString();
   }
 
-  // ================= DELETE =================
-  delete(row: any) {
-    // if (!confirm('Delete this usage record?')) return;
-    // this.usageService.delete(row.id).subscribe(() => {
-    //   this.loadUsage();
-    // });
+  // ================= EXPORT XLSX =================
+  exportToExcel() {
+    // export FILTERED data
+    const exportData = this.dataSource.filteredData.map((r: any) => ({
+      Item: r.itemName,
+      Quantity: r.quantity,
+      Department: r.department,
+      'Used For': r.usedFor,
+      'Taken By': r.takenBy,
+      'Given By': r.givenBy,
+      'Usage Time': new Date(r.usageTime).toLocaleString(),
+    }));
+
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(exportData);
+
+    const workbook: XLSX.WorkBook = {
+      Sheets: { Usage: worksheet },
+      SheetNames: ['Usage'],
+    };
+
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+
+    const blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+
+    saveAs(blob, `Usage_Report_${new Date().getTime()}.xlsx`);
   }
+
+  // ================= DELETE =================
+  delete(row: any) {}
 
   // ================= EDIT =================
   edit(row: any) {

@@ -15,6 +15,10 @@ import { ViewPurchaseComponent } from './features/purchase/view-purchase/view-pu
 import { AddUsageComponent } from './features/usage/add-usage/add-usage.component';
 import { ViewUsageComponent } from './features/usage/view-usage/view-usage.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { EditUserComponent } from './auth/edit-user/edit-user.component';
+import { ItemsComponent } from './features/items/items.component';
+import { AddItemsComponent } from './features/items/add-items/add-items.component';
+import { ViewItemsComponent } from './features/items/view-items/view-items.component';
 
 export const routes: Routes = [
   // Login
@@ -26,7 +30,6 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
-
   // Protected Application Routes
   {
     path: 'app',
@@ -71,6 +74,22 @@ export const routes: Routes = [
       {
         path: 'usage/view',
         component: ViewUsageComponent,
+      },
+      {
+        path: 'items',
+        component: ItemsComponent,
+      },
+      {
+        path: 'items/add',
+        component: AddItemsComponent,
+      },
+      {
+        path: 'items/view',
+        component: ViewItemsComponent,
+      },
+      {
+        path: 'profile',
+        component: EditUserComponent,
       },
     ],
   },

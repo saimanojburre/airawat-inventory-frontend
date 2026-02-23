@@ -1,12 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PurchaseService {
+export class ItemService {
   private baseUrl = `${environment.apiBaseUrl}/purchases`;
 
   constructor(private http: HttpClient) {}
@@ -20,24 +19,11 @@ export class PurchaseService {
     });
   }
 
-  // ✅ Add Purchase
-  addPurchase(data: any): Observable<any> {
-    return this.http.post(this.baseUrl, data, {
+  // ✅ Items dropdown
+  getItems() {
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/items`, {
       headers: this.getHeaders(),
     });
   }
-
-  // ✅ Bulk Purchase
-  bulkPurchase(data: any[]) {
-    return this.http.post(`${this.baseUrl}/bulk`, data, {
-      headers: this.getHeaders(),
-    });
-  }
-
-  // ✅ Get All Purchases
-  getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl, {
-      headers: this.getHeaders(),
-    });
-  }
+  bulkSave(data: any) {}
 }

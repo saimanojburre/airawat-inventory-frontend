@@ -33,6 +33,13 @@ import { ViewPurchaseComponent } from './features/purchase/view-purchase/view-pu
 import { AddUsageComponent } from './features/usage/add-usage/add-usage.component';
 import { ViewUsageComponent } from './features/usage/view-usage/view-usage.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { EditUserComponent } from './auth/edit-user/edit-user.component';
+import { AddItemsComponent } from './features/items/add-items/add-items.component';
+import { ViewItemsComponent } from './features/items/view-items/view-items.component';
+import { ItemsComponent } from './features/items/items.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +58,10 @@ import { RegisterComponent } from './auth/register/register.component';
     AddUsageComponent,
     ViewUsageComponent,
     RegisterComponent,
+    EditUserComponent,
+    AddItemsComponent,
+    ViewItemsComponent,
+    ItemsComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +89,9 @@ import { RegisterComponent } from './auth/register/register.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
+    MatMenuModule,
+    MatBadgeModule,
+    MatDividerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

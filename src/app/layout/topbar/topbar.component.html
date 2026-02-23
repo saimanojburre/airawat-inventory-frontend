@@ -7,16 +7,36 @@
 
   <!-- RIGHT -->
   <div class="right">
-    <div class="profile">
-      <span class="avatar"
-        ><img
-          src="assets/user.png"
-          alt="Logo"
-          style="width: 20px; height: 20px"
-      /></span>
-      <span class="name">Admin</span>
+    <!-- NOTIFICATIONS -->
+    <div class="notification" (click)="openNotifications()">
+      🔔
+      <span class="badge" *ngIf="notificationCount > 0">
+        {{ notificationCount }}
+      </span>
     </div>
 
-    <button class="logout-btn" (click)="logout()">Logout</button>
+    <!-- PROFILE DROPDOWN -->
+    <div class="profile-wrapper" (click)="toggleProfileMenu()">
+      <div class="profile">
+        <span class="avatar">
+          <img
+            src="assets/user.png"
+            alt="User"
+            style="width: 20px; height: 20px"
+          />
+        </span>
+        <span class="name">Admin</span>
+        <span class="arrow">▼</span>
+      </div>
+
+      <!-- DROPDOWN -->
+      <div class="dropdown" *ngIf="showProfileMenu">
+        <div class="dropdown-item" (click)="goProfile($event)">Profile</div>
+
+        <div class="dropdown-item" (click)="goSettings($event)">Settings</div>
+
+        <div class="dropdown-item logout" (click)="logout($event)">Logout</div>
+      </div>
+    </div>
   </div>
 </div>

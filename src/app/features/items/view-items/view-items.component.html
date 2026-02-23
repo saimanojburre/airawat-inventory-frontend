@@ -1,0 +1,70 @@
+<div class="page-header">
+  <button mat-button class="back-btn" (click)="goBack()">← Back</button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="export-btn"
+    (click)="exportToExcel()"
+  >
+    <mat-icon>download</mat-icon>
+    Export XLSX
+  </button>
+</div>
+
+<div class="items-view">
+  <h2>Items List</h2>
+
+  <!-- FILTER -->
+  <form [formGroup]="filterForm" class="filter-bar">
+    <mat-form-field appearance="outline">
+      <mat-label>Search Item</mat-label>
+      <input matInput formControlName="search" (keyup)="applyFilter()" />
+    </mat-form-field>
+  </form>
+
+  <!-- TABLE -->
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- ITEM -->
+    <ng-container matColumnDef="itemName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Item</th>
+      <td mat-cell *matCellDef="let r">{{ r.itemName }}</td>
+    </ng-container>
+
+    <!-- CATEGORY -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+      <td mat-cell *matCellDef="let r">{{ r.category }}</td>
+    </ng-container>
+
+    <!-- UNIT -->
+    <ng-container matColumnDef="unit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit</th>
+      <td mat-cell *matCellDef="let r">{{ r.unit }}</td>
+    </ng-container>
+
+    <!-- ACTIONS -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+
+      <td mat-cell *matCellDef="let r">
+        <button mat-icon-button color="primary" (click)="edit(r)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="delete(r)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20, 50]"
+    [pageSize]="10"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>

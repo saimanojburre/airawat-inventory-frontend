@@ -1,9 +1,20 @@
 <div class="page-header">
   <button mat-button class="back-btn" (click)="goBack()">← Back</button>
+
+  <!-- ✅ EXPORT BUTTON -->
+  <button
+    mat-raised-button
+    color="primary"
+    class="export-btn"
+    (click)="exportToExcel()"
+  >
+    <mat-icon>download</mat-icon>
+    Export XLSX
+  </button>
 </div>
 
 <div class="usage-view">
-  <h2>Usage Historry</h2>
+  <h2>Usage History</h2>
 
   <!-- FILTER BAR -->
   <form [formGroup]="filterForm" class="filter-bar">
