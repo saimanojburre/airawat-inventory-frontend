@@ -19,6 +19,9 @@ import { EditUserComponent } from './auth/edit-user/edit-user.component';
 import { ItemsComponent } from './features/items/items.component';
 import { AddItemsComponent } from './features/items/add-items/add-items.component';
 import { ViewItemsComponent } from './features/items/view-items/view-items.component';
+import { MetricsComponent } from './features/metrics/metrics.component';
+import { TotalUsageComponent } from './features/metrics/total-usage/total-usage.component';
+import { DeptUsageComponent } from './features/metrics/dept-usage/dept-usage.component';
 
 export const routes: Routes = [
   // Login
@@ -86,6 +89,18 @@ export const routes: Routes = [
       {
         path: 'items/view',
         component: ViewItemsComponent,
+      },
+      {
+        path: 'metrics',
+        component: MetricsComponent,
+      },
+      {
+        path: 'metrics/total-usage',
+        component: TotalUsageComponent,
+      },
+      {
+        path: 'metrics/dept-usage',
+        component: DeptUsageComponent,
       },
       {
         path: 'profile',

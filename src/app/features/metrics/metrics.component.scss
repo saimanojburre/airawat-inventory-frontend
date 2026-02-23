@@ -1,0 +1,33 @@
+.purchase-home {
+    padding: 10px;
+}
+
+.card-grid {
+    margin-top: 20px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.action-card {
+    cursor: pointer;
+    padding: 30px;
+    text-align: center;
+
+    border-radius: 12px;
+    transition: 0.25s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-6px);
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.action-card p {
+    color: var(--text-light);
+}

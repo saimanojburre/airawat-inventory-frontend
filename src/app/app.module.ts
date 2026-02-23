@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +40,9 @@ import { EditUserComponent } from './auth/edit-user/edit-user.component';
 import { AddItemsComponent } from './features/items/add-items/add-items.component';
 import { ViewItemsComponent } from './features/items/view-items/view-items.component';
 import { ItemsComponent } from './features/items/items.component';
+import { TotalUsageComponent } from './features/metrics/total-usage/total-usage.component';
+import { DeptUsageComponent } from './features/metrics/dept-usage/dept-usage.component';
+import { MetricsComponent } from './features/metrics/metrics.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,9 @@ import { ItemsComponent } from './features/items/items.component';
     AddItemsComponent,
     ViewItemsComponent,
     ItemsComponent,
+    TotalUsageComponent,
+    DeptUsageComponent,
+    MetricsComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,6 +98,7 @@ import { ItemsComponent } from './features/items/items.component';
     MatMenuModule,
     MatBadgeModule,
     MatDividerModule,
+    MatButtonToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

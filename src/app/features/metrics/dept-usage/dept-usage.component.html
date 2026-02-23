@@ -1,0 +1,29 @@
+<div class="header">
+  <button mat-button (click)="goBack()">← Back</button>
+</div>
+<div class="dept-container">
+  <!-- HEADER -->
+  <h2>Department Usage Analytics</h2>
+
+  <!-- PERIOD SELECTOR -->
+  <mat-button-toggle-group
+    [value]="selectedPeriod"
+    (change)="changePeriod($event.value)"
+  >
+    <mat-button-toggle value="daily">Daily</mat-button-toggle>
+    <mat-button-toggle value="weekly">Weekly</mat-button-toggle>
+    <mat-button-toggle value="monthly">Monthly</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <!-- DEPARTMENT DISTRIBUTION -->
+  <div class="chart-card">
+    <h3>Department Distribution</h3>
+    <canvas id="deptChart"></canvas>
+  </div>
+
+  <!-- MOST USED ITEMS -->
+  <div class="chart-card">
+    <h3>Most Used Items by Department</h3>
+    <canvas id="deptItemsChart"></canvas>
+  </div>
+</div>

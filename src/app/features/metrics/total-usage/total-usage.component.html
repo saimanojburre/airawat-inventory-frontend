@@ -1,0 +1,35 @@
+<div class="header">
+  <button mat-button (click)="goBack()">← Back</button>
+</div>
+<div class="usage-container">
+  <!-- HEADER -->
+  <h2>Total Usage Analytics</h2>
+
+  <!-- PERIOD SELECTOR -->
+  <mat-button-toggle-group
+    [value]="selectedPeriod"
+    (change)="changePeriod($event.value)"
+  >
+    <mat-button-toggle value="daily">Daily</mat-button-toggle>
+    <mat-button-toggle value="weekly">Weekly</mat-button-toggle>
+    <mat-button-toggle value="monthly">Monthly</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <!-- KPI -->
+  <div class="kpi-card">
+    <span>Total Usage</span>
+    <h3>₹ {{ totalUsage }}</h3>
+  </div>
+
+  <!-- TREND -->
+  <div class="chart-card">
+    <h3>Usage Trend</h3>
+    <canvas id="usageTrend"></canvas>
+  </div>
+
+  <!-- TOP ITEMS -->
+  <div class="chart-card">
+    <h3>Most Used Items</h3>
+    <canvas id="topItemsChart"></canvas>
+  </div>
+</div>

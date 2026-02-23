@@ -1,0 +1,39 @@
+.usage-container {
+    padding: 24px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.kpi-card {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 260px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.kpi-card span {
+    color: #666;
+}
+
+.kpi-card h3 {
+    margin-top: 6px;
+    font-size: 26px;
+}
+
+.chart-card {
+    background: white;
+    margin-top: 22px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+canvas {
+    max-height: 320px;
+}
