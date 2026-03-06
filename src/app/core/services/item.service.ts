@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root',
 })
 export class ItemService {
-  private baseUrl = `${environment.apiBaseUrl}/purchases`;
+  private baseUrl = `${environment.apiBaseUrl}/items`;
 
   constructor(private http: HttpClient) {}
 
@@ -25,5 +25,20 @@ export class ItemService {
       headers: this.getHeaders(),
     });
   }
-  bulkSave(data: any) {}
+
+  // ✅ Bulk Item save
+  bulkSave(data: any[]) {
+    return this.http.post(`${this.baseUrl}/bulk`, data, {
+      headers: this.getHeaders(),
+    });
+  }
+
+  fileSave(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(`${this.baseUrl}/upload/items`, formData, {
+      headers: this.getHeaders(), // ✅ NO content-type
+    });
+  }
 }

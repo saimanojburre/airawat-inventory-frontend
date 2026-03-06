@@ -85,11 +85,12 @@ export class AddItemsComponent {
       data.forEach((row: any) => {
         this.itemsFormArray.push(
           this.createRow({
-            itemName: row['Item Name'],
-            category: row['Category'],
-            unit: row['Unit'],
-            quantity: row['Quantity'],
-            pricePerUnit: row['Price Per Unit'],
+            itemName: row['itemName'],
+            category: row['category'],
+            unit: row['unit'],
+            quantity: 0,
+            pricePerUnit: 0,
+            totalPrice: 0,
           }),
         );
       });
@@ -111,10 +112,10 @@ export class AddItemsComponent {
       totalPrice: Number(r.quantity) * Number(r.pricePerUnit),
     }));
 
-    // this.itemService.bulkSave(payload).subscribe(() => {
-    //   alert('Items Saved Successfully');
-    //   this.router.navigate(['/app/items']);
-    // });
+    this.itemService.bulkSave(payload).subscribe(() => {
+      alert('Items Saved Successfully');
+      this.router.navigate(['/app/items']);
+    });
   }
 
   goBack() {

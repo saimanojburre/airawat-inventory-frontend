@@ -13,8 +13,20 @@ export class AddUsageComponent {
   usageForm!: FormGroup;
   items: any[] = [];
 
-  departments = ['Tiffin', 'North', 'South', 'Kitchen', 'Packing'];
-  usedForList = ['Restaurant', 'Party Order', 'Parcel Order'];
+  departments = [
+    'Tiffin',
+    'North Indian',
+    'Chinese',
+    'Service',
+    'Meals',
+    'Staff Food',
+    'Cleaning',
+    'Reception',
+    'Finger Foods',
+    'Line Parcel',
+    'Hot Drinks',
+  ];
+  usedForList = ['Restaurant', 'Party Order'];
 
   displayedColumns: string[] = [
     'item',
@@ -135,6 +147,7 @@ export class AddUsageComponent {
       next: () => {
         alert('Usage Saved Successfully');
         this.usages.clear();
+        this.goBack();
         this.addRow();
       },
       error: (err) => console.error(err),

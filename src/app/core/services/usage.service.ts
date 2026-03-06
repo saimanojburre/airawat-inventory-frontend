@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -28,6 +29,9 @@ export class UsageService {
       headers: this.getHeaders(),
     });
   }
+  updateUsage(id: number, data: any) {
+    return this.http.put(`${this.baseUrl}/usage/${id}`, data);
+  }
 
   // ✅ AVAILABLE STOCK
   getAvailableStock(itemId: number) {
@@ -37,14 +41,17 @@ export class UsageService {
   }
 
   getUsage() {
-    return this.http.get<any[]>(`${this.baseUrl}/usage`, {
-      headers: this.getHeaders(),
-    });
-  }
-  // ✅ ITEMS DROPDOWN
-  getItems() {
-    return this.http.get<any[]>(`${this.baseUrl}/items`, {
-      headers: this.getHeaders(),
-    });
+    return this.http
+      .get<any[]>(`${this.baseUrl}/usage`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(
+        map((usages) =>
+          usages.sort(
+            (a, b) =>
+              new Date(b.usageTime).getTime() - new Date(a.usageTime).getTime(),
+          ),
+        ),
+      );
   }
 }

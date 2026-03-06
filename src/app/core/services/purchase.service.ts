@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -36,8 +36,19 @@ export class PurchaseService {
 
   // ✅ Get All Purchases
   getAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl, {
-      headers: this.getHeaders(),
-    });
+    return this.http
+      .get<any[]>(this.baseUrl, {
+        headers: this.getHeaders(),
+      })
+      .pipe(
+        map((purchases) =>
+          purchases.sort((a, b) => {
+            const dateA = new Date(a?.purchaseDate || 0).getTime();
+            const dateB = new Date(b?.purchaseDate || 0).getTime();
+
+            return dateB - dateA; // latest first
+          }),
+        ),
+      );
   }
 }

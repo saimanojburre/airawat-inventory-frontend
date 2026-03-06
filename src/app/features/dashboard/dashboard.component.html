@@ -1,45 +1,102 @@
 <div class="dashboard">
-  <!-- STAT CARDS -->
-  <div class="card-grid">
-    <mat-card class="stat-card">
-      <div class="stat-header">Total Items</div>
-      <div class="stat-value">{{ stats.totalItems }}</div>
-    </mat-card>
-
-    <mat-card class="stat-card warning">
-      <div class="stat-header">Low Stock</div>
-      <div class="stat-value">{{ stats.lowStock }}</div>
-    </mat-card>
-
-    <mat-card class="stat-card success">
-      <div class="stat-header">Purchases</div>
-      <div class="stat-value">{{ stats.purchases }}</div>
-    </mat-card>
-
-    <mat-card class="stat-card info">
-      <div class="stat-header">Usage</div>
-      <div class="stat-value">{{ stats.usage }}</div>
-    </mat-card>
+  <!-- HEADER -->
+  <div class="dashboard-header">
+    <h2>{{ greetingMessage }}</h2>
+    <span>Inventory Analytics Overview</span>
   </div>
 
-  <!-- CHART + ACTIVITY -->
-  <div class="dashboard-grid">
-    <mat-card class="chart-card">
-      <h3>Stock Overview</h3>
-      <canvas id="stockChart"></canvas>
+  <!-- KPI CARDS -->
+  <div class="card-grid">
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="icon-box blue">
+          <mat-icon>inventory_2</mat-icon>
+        </div>
+        <div>
+          <p>Total Inventory Value</p>
+          <h2>
+            {{
+              stats.inventoryValue
+                | currency: "INR" : "symbol" : "1.0-0" : "en-IN"
+            }}
+          </h2>
+        </div>
+      </div>
     </mat-card>
 
-    <mat-card class="activity-card">
-      <h3>Recent Activity</h3>
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="icon-box green">
+          <mat-icon>shopping_cart</mat-icon>
+        </div>
 
-      <div class="activity" *ngFor="let a of activities">
-        <div class="dot" [ngClass]="a.type"></div>
+        <div class="stat-info">
+          <p>Purchases</p>
+          <h2>{{ stats.purchases }}</h2>
+        </div>
 
-        <div class="activity-content">
-          <span>{{ a.name }}</span>
-          <small>{{ a.date }}</small>
+        <!-- ADD BUTTON -->
+        <button
+          mat-icon-button
+          class="quick-add"
+          (click)="goToAddPurchase()"
+          matTooltip="Add Purchase"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="icon-box purple">
+          <mat-icon>analytics</mat-icon>
+        </div>
+        <div class="stat-info">
+          <p>Usage</p>
+          <h2>{{ stats.usage }}</h2>
+        </div>
+        <!-- ADD BUTTON -->
+        <button
+          mat-icon-button
+          class="quick-add"
+          (click)="goToAddUsage()"
+          matTooltip="Add Purchase"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="icon-box orange">
+          <mat-icon>warning</mat-icon>
+        </div>
+        <div>
+          <p>Low Stock</p>
+          <h2>{{ stats.lowStock }} Items</h2>
         </div>
       </div>
     </mat-card>
   </div>
+
+  <!-- ANALYTICS -->
+  <div class="analytics-grid">
+    <mat-card class="chart-card">
+      <h3>Department Usage</h3>
+      <canvas id="departmentChart"></canvas>
+    </mat-card>
+
+    <mat-card class="chart-card">
+      <h3>Category Usage</h3>
+      <canvas id="categoryChart"></canvas>
+    </mat-card>
+  </div>
+
+  <!-- TREND -->
+  <mat-card class="chart-card trend">
+    <h3>Weekly Usage Trend</h3>
+    <canvas id="weeklyChart"></canvas>
+  </mat-card>
 </div>

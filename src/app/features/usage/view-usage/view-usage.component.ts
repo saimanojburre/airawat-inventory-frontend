@@ -26,9 +26,17 @@ export class ViewUsageComponent {
     'time',
     'actions',
   ];
+  // dropdown options
+  departments: string[] = ['Kitchen', 'Restaurant', 'Tiffin', 'North'];
+
+  usedForOptions: string[] = ['Restaurant', 'Party Order'];
 
   dataSource = new MatTableDataSource<any>([]);
   filterForm!: FormGroup;
+
+  // EDIT STATE
+  editingId: number | null = null;
+  backupRow: any = null;
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -87,7 +95,6 @@ export class ViewUsageComponent {
 
   // ================= EXPORT XLSX =================
   exportToExcel() {
-    // export FILTERED data
     const exportData = this.dataSource.filteredData.map((r: any) => ({
       Item: r.itemName,
       Quantity: r.quantity,
@@ -118,11 +125,30 @@ export class ViewUsageComponent {
   }
 
   // ================= DELETE =================
-  delete(row: any) {}
+  delete(row: any) {
+    console.log('delete', row);
+  }
 
   // ================= EDIT =================
   edit(row: any) {
-    console.log('Edit usage:', row);
+    this.editingId = row.id;
+    this.backupRow = { ...row };
+  }
+
+  cancelEdit(row: any) {
+    Object.assign(row, this.backupRow);
+    this.editingId = null;
+    this.backupRow = null;
+  }
+
+  saveEdit(row: any) {
+    this.usageService.updateUsage(row.id, row).subscribe({
+      next: () => {
+        this.editingId = null;
+        this.backupRow = null;
+      },
+      error: () => alert('Update failed'),
+    });
   }
 
   // ================= BACK =================

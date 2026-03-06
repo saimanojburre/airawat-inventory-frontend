@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -10,7 +15,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class RegisterComponent {
   hidePassword = true;
+  hideConfirmPassword = true;
   error = '';
+  submitted = false;
+
   roles = [
     { label: 'User', value: 'USER' },
     { label: 'Manager', value: 'MANAGER' },
@@ -23,27 +31,65 @@ export class RegisterComponent {
     private router: Router,
   ) {}
 
-  registerForm = this.fb.group({
-    username: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-    role: ['', Validators.required], // ✅ NEW
-  });
+  showError(controlName: string, error: string): boolean {
+    const control = this.registerForm.get(controlName);
+
+    return !!(
+      control &&
+      control.hasError(error) &&
+      (control.touched || this.submitted)
+    );
+  }
+  /* ================= FORM ================= */
+
+  registerForm = this.fb.group(
+    {
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      role: ['', Validators.required],
+
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^(?=.*[A-Z])(?=.*\d).+$/),
+        ],
+      ],
+
+      confirmPassword: ['', Validators.required],
+    },
+    { validators: this.passwordMatchValidator },
+  );
+
+  /* ================= GETTERS ================= */
+
+  get f() {
+    return this.registerForm.controls;
+  }
+
+  /* ================= PASSWORD MATCH ================= */
+
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
+
+  /* ================= REGISTER ================= */
 
   register() {
-    if (this.registerForm.invalid) return;
+    this.submitted = true;
 
-    const { password, confirmPassword } = this.registerForm.value;
-
-    if (password !== confirmPassword) {
-      this.error = 'Passwords do not match';
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
       return;
     }
 
     this.authService.register(this.registerForm.value).subscribe({
       next: () => {
-        alert('Registerd Successfully');
+        alert('Registered Successfully');
         this.goToLogin();
       },
       error: () => (this.error = 'Registration failed'),

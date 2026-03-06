@@ -33,8 +33,8 @@ export class LoginComponent {
     this.loginError = false;
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: (token) => {
-        this.authService.saveToken(token);
+      next: (res: any) => {
+        this.authService.saveSession(res);
         this.loading = false;
         this.router.navigate(['/app/dashboard']);
       },

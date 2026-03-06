@@ -10,13 +10,30 @@
       <mat-form-field appearance="outline" class="input-field">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" />
+
+        <mat-error *ngIf="showError('username', 'required')">
+          Username is required
+        </mat-error>
+
+        <mat-error *ngIf="showError('username', 'minlength')">
+          Minimum 3 characters required
+        </mat-error>
       </mat-form-field>
 
       <!-- EMAIL -->
       <mat-form-field appearance="outline" class="input-field">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" />
+
+        <mat-error *ngIf="f.email.touched && f.email.hasError('required')">
+          Email is required
+        </mat-error>
+
+        <mat-error *ngIf="f.email.touched && f.email.hasError('email')">
+          Enter valid email address
+        </mat-error>
       </mat-form-field>
+
       <!-- ROLE -->
       <mat-form-field appearance="outline" class="input-field">
         <mat-label>Role</mat-label>
@@ -26,30 +43,93 @@
             {{ role.label }}
           </mat-option>
         </mat-select>
+
+        <mat-error *ngIf="f.role.touched && f.role.hasError('required')">
+          Role is required
+        </mat-error>
       </mat-form-field>
 
       <!-- PASSWORD -->
       <mat-form-field appearance="outline" class="input-field">
         <mat-label>Password</mat-label>
+
         <input
           matInput
           [type]="hidePassword ? 'password' : 'text'"
           formControlName="password"
         />
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword"
+        >
+          <mat-icon>
+            {{ hidePassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+        </button>
+
+        <mat-error
+          *ngIf="f.password.touched && f.password.hasError('required')"
+        >
+          Password is required
+        </mat-error>
+
+        <mat-error
+          *ngIf="f.password.touched && f.password.hasError('minlength')"
+        >
+          Minimum 6 characters required
+        </mat-error>
+
+        <mat-error *ngIf="f.password.touched && f.password.hasError('pattern')">
+          Must contain 1 uppercase letter & number
+        </mat-error>
       </mat-form-field>
 
       <!-- CONFIRM PASSWORD -->
       <mat-form-field appearance="outline" class="input-field">
         <mat-label>Confirm Password</mat-label>
-        <input matInput type="password" formControlName="confirmPassword" />
+
+        <input
+          matInput
+          [type]="hideConfirmPassword ? 'password' : 'text'"
+          formControlName="confirmPassword"
+        />
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="hideConfirmPassword = !hideConfirmPassword"
+        >
+          <mat-icon>
+            {{ hideConfirmPassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+        </button>
+
+        <mat-error
+          *ngIf="
+            registerForm.hasError('passwordMismatch') &&
+            f.confirmPassword.touched
+          "
+        >
+          Passwords do not match
+        </mat-error>
       </mat-form-field>
 
-      <!-- ERROR -->
+      <!-- SERVER ERROR -->
       <div class="error-message" *ngIf="error">
         {{ error }}
       </div>
 
-      <button mat-raised-button color="primary" class="login-btn">
+      <!-- REGISTER BUTTON -->
+      <button
+        mat-raised-button
+        color="primary"
+        class="login-btn"
+        [disabled]="registerForm.invalid"
+      >
         Register
       </button>
 

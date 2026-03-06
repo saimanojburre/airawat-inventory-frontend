@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Inventory } from 'src/app/inventory.model';
+import { map } from 'rxjs';
+import { Inventory } from 'src/app/core/models/inventory.model';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -20,8 +21,18 @@ export class InventoryService {
       Authorization: `Bearer ${token}`,
     };
 
-    return this.http.get<Inventory[]>(`${this.baseUrl}/inventory`, {
-      headers,
-    });
+    return this.http
+      .get<Inventory[]>(`${this.baseUrl}/inventory`, {
+        headers,
+      })
+      .pipe(
+        map((items) =>
+          items.sort((a, b) =>
+            (a.itemName || '')
+              .toLowerCase()
+              .localeCompare((b.itemName || '').toLowerCase()),
+          ),
+        ),
+      );
   }
 }
